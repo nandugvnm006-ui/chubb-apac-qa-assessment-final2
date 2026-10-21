@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assessment Demo — Claims</title>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, sans-serif; color: #182230; background: #f3f5f8; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 5vw; color: white; background: #173b70; }
+    h1 { font-size: 1.25rem; margin: 0; }
+    button { padding: .6rem .9rem; border: 0; border-radius: 6px; cursor: pointer; font: inherit; font-weight: 600; }
+    main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+    .panel { padding: 1.5rem; border: 1px solid #d8dee8; border-radius: 12px; background: white; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: .75rem; border-bottom: 1px solid #e4e8ef; text-align: left; }
+  </style>
+</head>
+<body>
+  <header><h1>Claims dashboard</h1><button id="logout-button" type="button">Log out</button></header>
+  <main>
+    <section class="panel">
+      <h2>Sample claims</h2>
+      <p>You are signed in to the local assessment demo.</p>
+      <table aria-label="Sample claims">
+        <thead><tr><th>Claim ID</th><th>Status</th><th>Type</th></tr></thead>
+        <tbody><tr><td>CLM-1001</td><td>Submitted</td><td>Motor</td></tr><tr><td>CLM-1002</td><td>In review</td><td>Property</td></tr></tbody>
+      </table>
+      <p id="logout-message" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <script>
+    document.querySelector('#logout-button').addEventListener('click', async () => {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      window.location.assign('/login');
+    });
+  </script>
+</body>
+</html>
